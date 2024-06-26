@@ -34,8 +34,9 @@
                 <label for="description">Project description: </label>
                 <textarea name="description" id="description" class="form-control"></textarea>
             </div>
-            <div>
+            <div class='d-flex justify-content-center'>
                 <button type="submit" class="btn btn-outline-secondary">Create Project</button>
+                <button type="submit" class="btn btn-outline-secondary"><a href=""></a>Create Task</button>
             </div>
         </form>
     </div>    

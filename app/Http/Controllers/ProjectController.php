@@ -24,8 +24,16 @@ class ProjectController extends Controller
         $project->name = $request->name;
         $project->description = $request->description;
         $project->save();
+        
 
+        return redirect()->route('home')->with('success');
         return redirect()->route('project.index')
         ->with('success', 'Project created successfully!');
+    }
+
+    public function index()
+    {
+        $projects = Auth::user()->projects;
+        return view('projects.index', compact('projects'));
     }
 }

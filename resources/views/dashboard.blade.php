@@ -28,8 +28,25 @@
                     <h1>Welcome {{ Auth::user()->name }}!</h1>
                 </div>
             </div>
+            <div class="py-5">
+                <button class="btn btn-outline-secondary"><a href= "{{ route('projects.create')}}">Create Project</a></button>
+            </div>
         </div>
     </div>
 
-    
+    @if ($projects->isEmpty())
+        <p>No projects found.</p> 
+    @else
+        <ul>
+            @foreach ($projects as $project)
+                <li>
+                    <a href="{{ route('projects.show', $project)}}">{{ $project->title}}</a> 
+                </li>
+             @endforeach
+        </ul>
+    @endif
+
+    <a href="{{ route('projects.create')}}">
+        <button>Create Project</button>
+    </a>  
 </x-app-layout>

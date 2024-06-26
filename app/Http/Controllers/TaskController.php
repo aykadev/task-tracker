@@ -6,26 +6,32 @@ use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
+    public function create(Project $project)
+    {
+        return view('tasks.create', compact('project'));
+    }
+
+
     public function store(Request $request, Project $project)
     {
-        $validatedData = $request->validate([
+        $validated = $request->validate([
             'title'=>'required|string|max:255',
-            'description'=>'nullable|string',
-            'assigned_to'=>'required|exists:users,id',
-            'due_date'=>'nullable|date',
+            'description'=>'required',
             'status'=>'required|in:new,in_progress,done',
             'priority'=>'required|in:low,medium,high',
+            'due_date'=>'nullable|date',
         ]);
 
-        $task = $project->tasks()->create([
-            'title'=>$validatedData['title'],
-            'description'=>$validatedData['description'],
-            'assigned_to'=>$validatedData['assigned_to'],
-            'due_date'=>$validatedData['due_date'],
-            'status'=>$validatedData['status'],
-            'priority'=>$validatedData['priority'],
-        ]);
+        $task = new Task();
+        $task->project_id = $project->id;
+        $task->user_id = Auth::id();
+        $task->title = $validate["title"];
+        $task->description = $validate["description"];
+        $task->status = $validate["status"];
+        $task->priority = $validate["priority"];
+        $task->due_date = $validate["due_date"];
+        $task->save();
 
-        return redirect()->route('projects.show',$project);
+        return redirect()->route('projects.show',$project)->with ('success', "Task created successfully!");
     }
 }

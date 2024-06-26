@@ -14,7 +14,7 @@ class Task extends Model
     ];
 
     protected $fillable = [
-        'title', 'description', 'project_id', 'assigned_to', 'status', 'priority', 'due-date'
+        'title', 'description', 'project_id', 'user_to', 'status', 'priority', 'due-date'
     ];
 
     public function project()
