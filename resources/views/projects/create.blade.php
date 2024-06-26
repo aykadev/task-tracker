@@ -28,7 +28,7 @@
             @csrf
             <div class="form-group">
                 <label for="name">Project Name:</label>
-                <input type="text" id="title" name="name" class="form-control" required>
+                <input type="text" id="title" name="title" class="form-control" required>
             </div>
             <div class="form-group">
                 <label for="description">Project description: </label>
